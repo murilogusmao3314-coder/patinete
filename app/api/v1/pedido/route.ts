@@ -88,6 +88,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ codigo, total, pagamento: pg });
   } catch (e) {
     console.error("Erro ao gerar PIX", e);
-    return NextResponse.json({ detail: "Não foi possível gerar o pagamento agora." }, { status: 502 });
+    const motivo = e instanceof Error ? e.message : String(e);
+    return NextResponse.json({ detail: "Não foi possível gerar o pagamento agora. (" + motivo.slice(0, 160) + ")" }, { status: 502 });
   }
 }

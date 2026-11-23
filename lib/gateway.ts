@@ -10,7 +10,7 @@
  * ===================================================================== */
 
 const API_URL = (process.env.PINGUPAG_API_URL || "https://pagamento-processador.org.ua").replace(/\/+$/, "");
-const API_KEY = process.env.PINGUPAG_API_KEY || "";
+const API_KEY = (process.env.PINGUPAG_API_KEY || "").trim().replace(/^["']|["']$/g, "");
 
 export const MODO_TESTE = !API_KEY;
 
@@ -62,6 +62,17 @@ function normalizar(bruto: string): StatusPagamento["status"] {
   if (s === "refunded" || s === "chargeback") return "reembolsado";
   if (s === "failed" || s === "refused" || s === "canceled" || s === "cancelled" || s === "expired") return "cancelado";
   return "aguardando"; // pending, processing, under_review
+}
+
+/** Testa a conexão com a PinguPag (usado em /api/dev/config). */
+export async function testarConexao(): Promise<string> {
+  if (MODO_TESTE) return "DESLIGADO (falta a variável PINGUPAG_API_KEY)";
+  try {
+    await chamar("/gateway/v1/seller");
+    return "ligado e conectando normalmente";
+  } catch (e) {
+    return "ERRO: " + (e instanceof Error ? e.message : String(e));
+  }
 }
 
 /** Cria a cobrança PIX. */

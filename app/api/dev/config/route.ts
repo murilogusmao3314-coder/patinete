@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { MODO_TESTE } from "@/lib/gateway";
+import { MODO_TESTE, testarConexao } from "@/lib/gateway";
 
 export const dynamic = "force-dynamic";
 
@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 export async function GET() {
   return NextResponse.json({
     mock: MODO_TESTE,
-    pingupag: MODO_TESTE ? "DESLIGADO (falta a variável PINGUPAG_API_KEY)" : "ligado",
+    pingupag: await testarConexao(),
     utmify: process.env.UTMIFY_API_TOKEN ? "ligado" : "desligado (falta UTMIFY_API_TOKEN)",
   });
 }
