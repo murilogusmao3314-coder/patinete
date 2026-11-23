@@ -22,7 +22,7 @@ export const NOME = "Patinete Elétrico VoltRide Cross Pro 500W";
 export const NOME_CURTO = "Smart Scooter Cross";
 
 /** Preços da oferta */
-export const PRECO = 97.9;
+export const PRECO = 89.9;
 export const PRECO_ORIG = 1299.0;
 export const PAR_2o = 84.1; // 2º patinete
 export const PRECO_OFERTA = 67.65; // oferta de saída do checkout
@@ -30,7 +30,7 @@ export const PAR_2o_OFERTA = 33.83;
 
 /** Catálogo usado pelo servidor e pelos eventos de pixel (slug -> preço) */
 export const PRECOS: Record<string, number> = {
-  "patinete-cross-pro-1un": 97.9,
+  "patinete-cross-pro-1un": 89.9,
   "patinete-cross-pro-2un": 182.0,
   "patinete-cross-pro-1un-combo": 83.22,
   "patinete-cross-pro-2un-combo": 154.7,

@@ -1223,7 +1223,7 @@ export default function Checkout() {
   /* ===== Janela "Espera! Oferta exclusiva" (aparece uma vez, ao tentar voltar antes de gerar o PIX) ===== */
   let janela = null;
   if (janelaOferta) {
-    const de = r2(97.9 + (k ? 84.1 : 0));
+    const de = r2(89.9 + (k ? 84.1 : 0));
     const por = r2(PRECO_OFERTA + (k ? PAR_2o_OFERTA : 0));
     const eco = r2(de - por);
     const pct = Math.round((eco / de) * 100);
