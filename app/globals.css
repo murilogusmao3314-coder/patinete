@@ -1,0 +1,4 @@
+@import "tailwindcss";
+
+/* O visual original da loja fica em app/loja.css (CSS já compilado do site antigo).
+   Este arquivo gera as classes novas que você (ou o v0) adicionar nos componentes. */
