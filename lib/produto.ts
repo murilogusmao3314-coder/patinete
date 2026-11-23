@@ -197,7 +197,7 @@ export function iniciarProduto(): () => void {
   /* ===== Janela "Escolha sua oferta" (abre no COMPRAR) ===== */
   const OFERTA: Record<number, { preco: number; antigo: number; nome: string }> = {
     1: { preco: 89.9, antigo: 1299.0, nome: "1 patinete" },
-    2: { preco: 182.0, antigo: 2598.0, nome: "2 patinetes" },
+    2: { preco: 160.0, antigo: 2598.0, nome: "2 patinetes" },
   };
   const brl = (v: number) => "R$ " + v.toFixed(2).replace(".", ",");
   const SVG_X =

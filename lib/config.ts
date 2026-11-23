@@ -31,7 +31,7 @@ export const PAR_2o_OFERTA = 33.83;
 /** Catálogo usado pelo servidor e pelos eventos de pixel (slug -> preço) */
 export const PRECOS: Record<string, number> = {
   "patinete-cross-pro-1un": 89.9,
-  "patinete-cross-pro-2un": 182.0,
+  "patinete-cross-pro-2un": 160.0,
   "patinete-cross-pro-1un-combo": 83.22,
   "patinete-cross-pro-2un-combo": 154.7,
   "patinete-cross-pro-1un-oferta": 67.65,
