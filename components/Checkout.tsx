@@ -121,6 +121,7 @@ export default function Checkout() {
   const [qrSrc, setQrSrc] = useState("");
   const [gerando, setGerando] = useState(false);
   const [pago, setPago] = useState(false);
+  const [copiado, setCopiado] = useState(false);
   const [toasts, setToasts] = useState<Toast[]>([]);
   const [janelaOferta, setJanelaOferta] = useState(false);
   const [corOferta, setCorOferta] = useState("Preto Padrão");
@@ -475,7 +476,11 @@ export default function Checkout() {
   }
   function copiar() {
     if (!pix || !pix.pixCode) return toast("Código PIX não disponível ainda", "", true);
-    const ok = () => toast("Código PIX copiado!", "Cole no app do seu banco.");
+    const ok = () => {
+      toast("Código PIX copiado!", "Cole no app do seu banco.");
+      setCopiado(true);
+      setTimeout(() => setCopiado(false), 3000);
+    };
     const antigo = () => {
       const t = document.createElement("textarea");
       t.value = pix.pixCode;
@@ -1039,7 +1044,7 @@ export default function Checkout() {
   const restante = pix ? Math.max(0, 600000 - (agora - pix.createdAt)) : 0;
   const recebedor = pix && pix.pixCode && !pago ? nomeNoPix(pix.pixCode) : "";
   const passos: [string, React.ReactNode][] = [
-    ["Copie o código PIX", (<>Toque no botão <span className="font-semibold">&quot;Utilizar PIX Copia e Cola&quot;</span> abaixo.</>)],
+    ["Copie o código PIX", (<>Toque no botão <span className="font-semibold">&quot;Copiar código PIX&quot;</span> acima.</>)],
     ["Abra o app do seu banco", (<>Vá em <span className="font-semibold">PIX → Pix Copia e Cola</span>.</>)],
     ["Confirme o pagamento", "Cole o código, confira o valor e finalize."],
   ];
@@ -1085,6 +1090,13 @@ export default function Checkout() {
                     </>
                   )}
                 </p>
+                <div className="mt-3 text-left">
+                  <p className="text-[11px] font-semibold text-gray-500 uppercase tracking-wide mb-1">Pix copia e cola</p>
+                  <div className="bg-gray-50 border-2 border-dashed border-gray-200 rounded-xl px-3 py-2.5 text-[12px] text-gray-700 font-mono break-all select-all leading-snug max-h-24 overflow-y-auto">{pix.pixCode}</div>
+                  <button className={"mt-2 w-full h-[50px] rounded-full text-white font-bold text-[14px] flex items-center justify-center gap-2 transition-all active:scale-[0.98] " + (copiado ? "bg-[#00b37e]" : "bg-[#FF2D55]")} onClick={copiar}>
+                    <I n={copiado ? "check" : "copy"} cls="h-4 w-4" /> {copiado ? "CÓDIGO COPIADO!" : "COPIAR CÓDIGO PIX"}
+                  </button>
+                </div>
               </>
             ) : (
               <div className="w-48 h-48 mx-auto bg-gray-100 rounded-xl flex items-center justify-center mb-4 border-2 border-gray-200">
@@ -1194,9 +1206,6 @@ export default function Checkout() {
           </>
         ) : !pago ? (
           <>
-            <button className="w-full h-[50px] rounded-full bg-[#FF2D55] text-white font-bold text-[14px] flex items-center justify-center gap-2 transition-all active:scale-[0.98] mb-2" onClick={copiar}>
-              <I n="copy" cls="h-4 w-4" /> UTILIZAR PIX COPIA E COLA
-            </button>
             <div className="flex items-center justify-center gap-2">
               <div className="w-4 h-4 border-2 border-gray-300 border-t-[#FF2D55] rounded-full animate-spin" />
               <span className="text-[12px] text-gray-400">Aguardando confirmação do pagamento...</span>
