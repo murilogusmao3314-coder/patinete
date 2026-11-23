@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { consultarPagamento } from "@/lib/gateway";
+import { sincronizarVenda } from "@/lib/vendas";
 
 export const dynamic = "force-dynamic";
 
@@ -7,7 +7,8 @@ export const dynamic = "force-dynamic";
 export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   try {
-    return NextResponse.json({ pago: await consultarPagamento(id) });
+    const st = await sincronizarVenda(id);
+    return NextResponse.json({ pago: st.status === "pago" });
   } catch {
     return NextResponse.json({ pago: false });
   }
