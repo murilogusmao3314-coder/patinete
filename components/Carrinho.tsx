@@ -3,7 +3,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { A, EXTRAS, brl } from "@/lib/config";
-import { nxMeta, ttEvento } from "@/lib/rastreamento";
+import { ttEvento } from "@/lib/rastreamento";
 
 const CHECKOUT_URL = "/checkout";
 const PRODUTO_URL = "/";
@@ -69,10 +69,8 @@ export default function Carrinho() {
   }, []);
 
   function alternarExtra(i: number) {
-    const novo = !extras[i];
-    setExtras({ ...extras, [i]: novo });
+    setExtras({ ...extras, [i]: !extras[i] });
     ev("AddToCart", { value: UPSELLS[i].preco, content_name: UPSELLS[i].nome });
-    if (novo) nxMeta("AddToCart", [{ slug: "patinete-extra-" + UPSELLS[i].id, quantidade: 1 }]);
   }
 
   function compartilhar() {

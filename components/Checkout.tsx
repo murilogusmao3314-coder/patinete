@@ -4,7 +4,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import QRCode from "qrcode";
 import { A, API, EXTRAS, NOME, NOME_CURTO, PAR_2o as PAR_2o_NORMAL, PAR_2o_OFERTA, PRECO as PRECO_NORMAL, PRECO_OFERTA, PRECO_ORIG, THUMB, brl, r2 } from "@/lib/config";
-import { iniciarXtracky, nxMeta, ttEvento, type Item } from "@/lib/rastreamento";
+import { iniciarXtracky, ttEvento, type Item } from "@/lib/rastreamento";
 
 const CARRINHO_URL = "/carrinho";
 
@@ -105,10 +105,6 @@ function nomeNoPix(codigo: string) {
   }
 }
 
-function cookie(n: string) {
-  const m = document.cookie.match(new RegExp("(?:^|; )" + n + "=([^;]*)"));
-  return m ? decodeURIComponent(m[1]) : "";
-}
 
 export default function Checkout() {
   const [pronto, setPronto] = useState(false);
@@ -236,7 +232,6 @@ export default function Checkout() {
       sessionStorage.removeItem(chaveSessao(total));
     } catch {}
     ev("CompletePayment", { value: px && px.valor ? px.valor : total, email: S.current.V.email, phone: S.current.V.phone });
-    if (window.nxMetaCompra && px && px.codigo) window.nxMetaCompra(px.codigo, px.valor);
     toast("Pagamento confirmado! ✅", "Seu pedido foi aprovado. Redirecionando...");
     const cod = px && px.codigo ? "?codigo=" + encodeURIComponent(px.codigo) + "&frete=" + S.current.frete : "";
     setTimeout(() => (location.href = "/pedido-concluido" + cod), 2500);
@@ -298,7 +293,6 @@ export default function Checkout() {
       frete: FRETE_COD[frete],
       metodo: "pix",
       origem,
-      meta: window.nxMetaCtx ? window.nxMetaCtx() : { fbp: cookie("_fbp"), fbc: cookie("_fbc"), referrer_url: String(document.referrer || "").slice(0, 500) },
     };
     try {
       const r = await fetch(API + "/pedido", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(corpo) });
@@ -325,7 +319,6 @@ export default function Checkout() {
         sessionStorage.setItem(chaveSessao(total), JSON.stringify(novo));
       } catch {}
       ev("AddPaymentInfo", { value: novo.valor, email: V.email, phone: V.phone });
-      nxMeta("AddPaymentInfo", itensPedido(), { email: V.email, phone: V.phone, name: V.name, city: V.city, state: V.state });
       S.current.pix = novo;
       setPix(novo);
       setGerando(false);
@@ -530,7 +523,6 @@ export default function Checkout() {
 
     iniciarXtracky();
     ev("InitiateCheckout", { value: total0, quantity: 1 });
-    nxMeta("InitiateCheckout", itensPedido());
 
     /* Atalho de teste: ?dev=1 só funciona quando a API está em modo teste (sem gateway). Preenche dados de exemplo e salta para a revisão. */
     if (Q.get("dev") === "1" && !rec) {

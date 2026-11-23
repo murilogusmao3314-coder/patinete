@@ -1,7 +1,7 @@
 /* Interações da página do produto (galeria, cores, contagem, abas, janelas de oferta, Central de Ajuda).
  * Roda depois que o React desenha a página (ver components/Produto.tsx) e devolve uma função de limpeza. */
 import { A as ASSETS } from "./config";
-import { nxMeta, ttEvento } from "./rastreamento";
+import { ttEvento } from "./rastreamento";
 
 const CARRINHO_URL = "/carrinho";
 const PRECO = 97.9;
@@ -296,7 +296,6 @@ export function iniciarProduto(): () => void {
       } else if (s && s.getAttribute("data-s") === "fechar") fechaSheet();
       else if (s && s.getAttribute("data-s") === "confirmar") {
         ev("InitiateCheckout", { value: OFERTA[sQtd].preco, content_name: "Patinete VoltRide Cross Pro - " + sCor + " x" + sQtd });
-        nxMeta("AddToCart", [{ slug: "patinete-cross-pro-" + (sQtd === 2 ? "2un" : "1un"), quantidade: 1 }]);
         const u = new URL(CARRINHO_URL, location.href);
         u.searchParams.set("cor", sCor === "Preto" ? "Padrão" : sCor);
         u.searchParams.set("qtd", String(sQtd));
@@ -326,7 +325,6 @@ export function iniciarProduto(): () => void {
     }
     badge.textContent = String(nCarrinho);
     ev("AddToCart", { content_name: "Patinete VoltRide Cross Pro - " + corAtual });
-    nxMeta("AddToCart", [{ slug: "patinete-cross-pro-1un", quantidade: 1 }]);
   });
 
   /* ===== Avaliações extras, Central de Ajuda, "Promoção Relâmpago", linhas clicáveis ===== */
@@ -474,7 +472,6 @@ export function iniciarProduto(): () => void {
     document.body.style.overflow = "hidden";
   }
   on(document.querySelector('button[aria-label="Carrinho"]'), "click", abrePromo);
-  nxMeta("ViewContent", [{ slug: "patinete-cross-pro-1un", quantidade: 1 }]);
 
   return () => {
     ctl.abort();

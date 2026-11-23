@@ -28,7 +28,7 @@ export const PAR_2o = 84.1; // 2º patinete
 export const PRECO_OFERTA = 67.65; // oferta de saída do checkout
 export const PAR_2o_OFERTA = 33.83;
 
-/** Catálogo usado pelo servidor e pelos eventos de pixel (slug -> preço) */
+/** Catálogo usado pelo servidor para calcular o total do pedido (slug -> preço) */
 export const PRECOS: Record<string, number> = {
   "patinete-cross-pro-1un": 97.9,
   "patinete-cross-pro-2un": 182.0,

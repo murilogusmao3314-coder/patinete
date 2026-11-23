@@ -34,7 +34,7 @@ Para testar o fluxo inteiro até "Pedido concluído", configure `GATEWAY_TESTE_A
 
 ## Variáveis de ambiente (Vercel)
 
-Veja `.env.example`: `META_PIXEL_ID`, `META_ACCESS_TOKEN` e `GATEWAY_TESTE_APROVAR_SEGUNDOS`.
+Veja `.env.example`: `GATEWAY_TESTE_APROVAR_SEGUNDOS` (só para teste).
 
 ## Rodar no computador
 
