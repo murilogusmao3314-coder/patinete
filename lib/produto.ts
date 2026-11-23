@@ -4,7 +4,7 @@ import { A as ASSETS } from "./config";
 import { ttEvento } from "./rastreamento";
 
 const CARRINHO_URL = "/carrinho";
-const PRECO = 97.9;
+const PRECO = 89.9;
 const CONTAGEM_SEGUNDOS = 5 * 60; // a contagem recomeça sozinha quando chega a zero
 
 export function iniciarProduto(): () => void {
@@ -196,8 +196,8 @@ export function iniciarProduto(): () => void {
 
   /* ===== Janela "Escolha sua oferta" (abre no COMPRAR) ===== */
   const OFERTA: Record<number, { preco: number; antigo: number; nome: string }> = {
-    1: { preco: 97.9, antigo: 1299.0, nome: "1 patinete" },
-    2: { preco: 182.0, antigo: 2598.0, nome: "2 patinetes" },
+    1: { preco: 89.9, antigo: 1299.0, nome: "1 patinete" },
+    2: { preco: 160.0, antigo: 2598.0, nome: "2 patinetes" },
   };
   const brl = (v: number) => "R$ " + v.toFixed(2).replace(".", ",");
   const SVG_X =
@@ -422,7 +422,7 @@ export function iniciarProduto(): () => void {
       SVG_ZAP +
       '<span class="text-[13px] font-extrabold">Promoção Relâmpago</span></div><span class="text-[11px] font-medium opacity-95">Oferta por tempo limitado</span></div>' +
       '<div class="px-4 pt-3 pb-2 flex gap-3 items-center"><div class="w-14 h-14 rounded-lg bg-gray-50 overflow-hidden flex-shrink-0 flex items-center justify-center"><img alt="Patinete Elétrico VoltRide Cross Pro 500W" class="w-full h-full object-contain" src="' + A + 'p1.webp"></div><div class="flex-1 min-w-0">' +
-      '<p class="text-[13px] font-semibold text-black leading-snug">Patinete Elétrico VoltRide Cross Pro 500W</p><div class="flex items-baseline gap-2 mt-0.5"><span class="text-[18px] font-extrabold text-[#00B894]">R$ 97,90</span><span class="text-[12px] text-gray-400 line-through">R$ 1299,00</span></div></div></div>' +
+      '<p class="text-[13px] font-semibold text-black leading-snug">Patinete Elétrico VoltRide Cross Pro 500W</p><div class="flex items-baseline gap-2 mt-0.5"><span class="text-[18px] font-extrabold text-[#00B894]">R$ 89,90</span><span class="text-[12px] text-gray-400 line-through">R$ 1299,00</span></div></div></div>' +
       '<div class="px-4 pt-2 pb-3"><p class="text-[13px] text-black mb-2.5">Modelo: <span class="font-bold">' + corPromo + '</span></p><div class="flex items-start gap-3 pt-3">';
     ["Preto", "Azul", "Rosa", "Branco", "Laranja"].forEach((c) => {
       const ativo = corPromo === c;
@@ -435,7 +435,7 @@ export function iniciarProduto(): () => void {
     });
     h +=
       '</div></div><div class="px-4 py-2.5 flex items-center justify-center gap-5 border-t border-gray-100"><div class="flex items-center gap-1.5 text-[11px] text-gray-700">' + SV_SH + '<span>Compra segura</span></div><div class="flex items-center gap-1.5 text-[11px] text-gray-700">' + SV_TR + "<span>Frete grátis</span></div></div>" +
-      '<div class="bg-gray-50 px-4 py-3 pb-5"><button class="w-full h-12 rounded-full bg-[#FE2C55] text-white text-[14px] font-extrabold tracking-wide shadow-lg shadow-[#FE2C55]/30 active:scale-[0.98] transition" data-pc-ok="1">Confirmar compra — R$ 97,90</button></div></div>';
+      '<div class="bg-gray-50 px-4 py-3 pb-5"><button class="w-full h-12 rounded-full bg-[#FE2C55] text-white text-[14px] font-extrabold tracking-wide shadow-lg shadow-[#FE2C55]/30 active:scale-[0.98] transition" data-pc-ok="1">Confirmar compra — R$ 89,90</button></div></div>';
     promo.innerHTML = h;
   }
   function fechaPromo() {

@@ -9,7 +9,7 @@ const CHECKOUT_URL = "/checkout";
 const PRODUTO_URL = "/";
 const IMG = A + "patinete/";
 const THUMB: Record<string, string> = { Preto: "p1-thumb.webp", Azul: "p-azul-thumb.webp", Rosa: "p-rosa-thumb.webp", Branco: "p-branco-thumb.webp", Laranja: "p-laranja-thumb.webp" };
-const LINHA: Record<number, { preco: number; antigo: number }> = { 1: { preco: 97.9, antigo: 1299.0 }, 2: { preco: 182.0, antigo: 2598.0 } }; // 2 patinetes têm preço de pacote
+const LINHA: Record<number, { preco: number; antigo: number }> = { 1: { preco: 89.9, antigo: 1299.0 }, 2: { preco: 160.0, antigo: 2598.0 } }; // 2 patinetes têm preço de pacote
 const UPSELLS = Object.entries(EXTRAS).map(([id, e]) => ({ id, ...e }));
 const DESCONTO_EXTRA = 0.15; // 15% em todo o pedido quando leva pelo menos 1 produto extra
 
